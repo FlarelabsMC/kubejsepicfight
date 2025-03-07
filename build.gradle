@@ -87,6 +87,22 @@ repositories {
     maven {
         url "https://cursemaven.com"
     }
+    maven {
+        url = "https://maven.saps.dev/minecraft"
+        content {
+            includeGroup "dev.latvian.mods"
+        }
+    }
+    maven {
+        url "https://maven.saps.dev/releases"
+        content {
+            includeGroup "dev.latvian.mods"
+            includeGroup "dev.ftb.mods"
+        }
+    }
+    maven {
+        url = "https://maven.architectury.dev"
+    }
 }
 
 dependencies {
@@ -94,6 +110,9 @@ dependencies {
     
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
+    implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
+    implementation fg.deobf("dev.latvian.mods:rhino-forge:${rhino_version}")
+    implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
     implementation fg.deobf("curse.maven:epic-fight-mod-405076:${epic_fight_version}")
 }
 
@@ -104,7 +123,8 @@ tasks.withType(ProcessResources).configureEach {
         loader_version_range: loader_version_range,
         mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
         mod_authors: mod_authors, mod_description: mod_description,
-        epic_fight_version_range: epic_fight_version_range
+        epic_fight_version_range: epic_fight_version_range,
+        kubejs_version: kubejs_version, rhino_version: rhino_version, architectury_version: architectury_version,
     ]
     inputs.properties replaceProperties
 
